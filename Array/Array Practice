@@ -31,3 +31,20 @@ class Solution(object):
                 nums[k] = n
                 k += 1
         return k
+
+
+1929. Concatenation of Array
+class Solution(object):
+    def getConcatenation(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[int]
+        """
+        newArray = [0] * (len(nums) * 2)
+        k = 0
+        for i in range(len(newArray)):
+            if k == len(nums):
+                k = 0 
+            newArray[i] = nums[k]
+            k += 1
+        return newArray
