@@ -16,3 +16,18 @@ class Solution(object):
                 temp = n
                 k +=1
         return k
+        
+ 27. Remove Element     
+ class Solution(object):
+    def removeElement(self, nums, val):
+        """
+        :type nums: List[int]
+        :type val: int
+        :rtype: int
+        """
+        k = 0 #the index shifting through the array.
+        for i, n in enumerate(nums):
+            if val != n:
+                nums[k] = n
+                k += 1
+        return k
