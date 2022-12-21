@@ -31,6 +31,32 @@ class Solution(object):
                 nums[k] = n
                 k += 1
         return k
+        
+        
+682. Baseball Game
+class Solution(object):
+    def calPoints(self, operations):
+        """
+        :type operations: List[str]
+        :rtype: int
+        """
+        newArray = [0] * len(operations)
+        k = 0 #the index of the last value in the array
+        for i in operations:
+            if i == "C":
+                k -= 1
+                newArray[k] = 0
+            elif i == "D":
+                newArray[k] = newArray[k-1] * 2
+                k += 1
+            elif i == "+":
+                newArray[k] = newArray[k-1] + newArray[k-2]
+                k += 1
+            else:
+                newArray[k] = int(i)
+                k += 1
+
+        return sum(newArray)
 
 
 1929. Concatenation of Array
