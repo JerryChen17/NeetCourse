@@ -1,0 +1,2 @@
+1. try to determine and eliminate the special case. A good exception handling with return could save a lot of trouble.
+2. if the case could be solved by the previous function, just use it then, it could simplify things.
