@@ -1,0 +1,140 @@
+class Node(object):
+
+    def __init__(self, val = None, next = None): #Node init
+        self.val = val
+        self.next = next
+
+class MyLinkedList(object):
+
+    def __init__(self): #only give the self.head attributes
+        self.head = None
+
+    def get(self, index):
+        """
+        :type index: int
+        :rtype: int
+        """
+
+        if not self.head: #if self.head is none, there is no node the linked list yet
+            return -1
+        elif index == 0: #index 0 is the self.head
+            return self.head.val
+        else:
+            curr = self.head
+            counter = 0
+            while counter < index:
+                #check if the index is valid, because when curr is none but counter < index, that means the index is greater than the total length
+                if curr:
+                    curr = curr.next
+                else:
+                    return -1
+                counter += 1
+            if not curr: #any index causing curr == none is invalid
+                return -1
+            else:
+                return curr.val
+        
+
+    def addAtHead(self, val):
+        """
+        :type val: int
+        :rtype: None
+        """
+        #add at head, duh
+        newNode = Node(val)
+        newNode.next = self.head
+        self.head = newNode
+
+    def addAtTail(self, val):
+        """
+        :type val: int
+        :rtype: None
+        """
+        newNode = Node(val)
+        
+        if not self.head: #if self.head is none, addAtTail is as same as addAtHead
+            self.head = newNode
+        else:
+            curTail = self.head
+            while curTail.next: #go to the end of the linked list to get the tail
+                curTail = curTail.next
+            curTail.next = newNode
+        
+
+    def addAtIndex(self, index, val):
+        """
+        :type index: int
+        :type val: int
+        :rtype: None
+        """
+        newNode = Node(val)
+
+        if index == 0: #if index == 0, it is addAtHead
+            self.addAtHead(val)
+            return
+        if not self.head: #check if the linked list is empty
+            return
+        else:
+            prev = self.head
+            for i in range(index - 1):
+                prev = prev.next
+                if not prev:
+                    self.addAtTail(val)
+                    return
+
+            newNode.next = prev.next
+            prev.next = newNode
+
+
+    def deleteAtIndex(self, index):
+        """
+        :type index: int
+        :rtype: None
+        """
+        prev = self.head
+        counter = 0
+        if index == 0: #if handling delete at head.
+            if not self.head.next:
+                self.head = None
+            else:
+                self.head = self.head.next
+            return
+        
+        while counter < index - 1:
+            if prev:
+                prev = prev.next
+            else:
+                return
+            counter += 1
+        if prev:            
+            if prev.next:
+                if prev.next.next:
+                    prev.next = prev.next.next
+                    return
+                else:
+                    prev.next = None   
+
+
+commandList = ["MyLinkedList","addAtIndex","get"]
+paramList = [[],[1,0],[0]]
+
+["MyLinkedList","addAtHead","addAtTail","addAtIndex","get","deleteAtIndex","get","get","deleteAtIndex","deleteAtIndex","get","deleteAtIndex","get"]
+[[],[1],[3],[1,2],[1],[1],[1],[3],[3],[0],[0],[0],[0]]
+
+
+myLinkedList = MyLinkedList()
+
+#get the param running with [1, 2] test case
+def exeCommand(param):
+    if len(param) < 2:
+        return "(" + str(param[0]) + ")"
+    else:
+        return  "(" + str(param[0]) + "," + str(param[1]) + ")"
+flag = 0
+#simulating the feeding procedure
+for func, param in zip(commandList, paramList):
+    if flag == 0:
+        flag += 1
+        continue
+    funcName = "myLinkedList." + func +  exeCommand(param)
+    eval(funcName)
