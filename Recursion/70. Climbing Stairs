@@ -1,0 +1,22 @@
+class Solution(object):
+    def __init__(self):
+        self.hashMap = {}
+    def climbStairs(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        # base case
+        if n == 2:
+            return 2
+        if n == 1:
+            return 1
+        if n in self.hashMap:
+            return self.hashMap[n]
+        #the function calling itself with a different input
+        #return self.climbStairs(n - 1) + self.climbStairs(n - 2)
+
+        #due to time limit exceeded, try adapting hash map to reduce the repeated calculation
+        sumAtn = self.climbStairs(n - 1) + self.climbStairs(n - 2)
+        self.hashMap[n] = sumAtn
+        return sumAtn
