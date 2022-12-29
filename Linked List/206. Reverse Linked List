@@ -1,0 +1,47 @@
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution(object):
+    """
+    def reverseList(self, head):
+    """
+        # :type head: ListNode
+        # :rtype: ListNode
+    """
+        prev, curr = None, head
+        while curr:
+            temp = curr.next
+            curr.next = prev
+            prev = curr
+            curr = temp
+        
+        return prev
+    """
+    def reverseList(self, head):
+        curNode, headNode = self.reverseListSelf(head) #A : Read B: need to use this extra layer to catch the param and feed it back
+        return headNode
+    def reverseListSelf(self, head):
+        """
+        try with recursive function
+        """
+        curNode = head
+        # base case
+        if not curNode:
+            return None, None
+        if not curNode.next:
+            headNode = curNode
+            return curNode, headNode
+
+        
+        # the function calling itself with a different input
+        nextNode, headNode = self.reverseListSelf(curNode.next)
+        nextNode.next = curNode
+        curNode.next = None
+        return curNode, headNode # B:   Read A: because this one return two param. back
+
+
+        
+            
+        
