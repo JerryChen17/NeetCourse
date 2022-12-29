@@ -1,0 +1,14 @@
+class Solution(object):
+    def fib(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        #base case
+        if n == 1:
+            return 1
+        if n == 0:
+            return 0
+
+        #the function calling itself with a different input
+        return self.fib(n - 1) + self.fib(n - 2)
