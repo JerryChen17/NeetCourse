@@ -1,0 +1,63 @@
+class Page(object):
+    def __init__(self, prevPage = None, currPage = None, nextPage = None):
+        self.prevPage = prevPage
+        self.currPage = currPage
+        self.nextPage = nextPage
+
+class BrowserHistory(object):
+
+    def __init__(self, homepage):
+        """
+        :type homepage: str
+        """
+        newPage = Page()
+        newPage.currPage = homepage
+        self.currPage = newPage
+        
+
+    def visit(self, url):
+        """
+        :type url: str
+        :rtype: None
+        """
+        newPage = Page()
+        self.currPage.nextPage = newPage
+        newPage.prevPage = self.currPage
+        newPage.currPage = url
+        self.currPage = newPage
+        
+
+    def back(self, steps):
+        """
+        :type steps: int
+        :rtype: str
+        """
+        curr = self.currPage
+        count = 0
+        while curr.prevPage and count < steps: #this should stop when curr.prevPage is none or count == steps
+            curr = curr.prevPage
+            count += 1
+        self.currPage = curr
+        return self.currPage.currPage
+        
+
+    def forward(self, steps):
+        """
+        :type steps: int
+        :rtype: str
+        """
+        curr = self.currPage
+        count = 0
+        while curr.nextPage and count < steps: #this should stop when curr.nextPage is none or count == steps
+            curr = curr.nextPage
+            count += 1
+        self.currPage = curr
+        return self.currPage.currPage
+        
+
+
+# Your BrowserHistory object will be instantiated and called as such:
+# obj = BrowserHistory(homepage)
+# obj.visit(url)
+# param_2 = obj.back(steps)
+# param_3 = obj.forward(steps)
