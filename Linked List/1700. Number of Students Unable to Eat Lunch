@@ -1,0 +1,26 @@
+class Solution(object):
+    def countStudents(self, students, sandwiches):
+        """
+        :type students: List[int]
+        :type sandwiches: List[int]
+        :rtype: int
+        """
+        sizeCount = 0
+        while True:
+            #check if all the students in the queue has been iterated
+            if sizeCount == len(students):
+                return len(students)
+            if students[0] == sandwiches[0]:
+                students = students[1:]
+                sandwiches = sandwiches[1:]
+                sizeCount = 0
+            
+            #notice that the .append function return None
+            else:
+                head = students[0]
+                students = students[1:]
+                students.append(head)
+                sizeCount += 1
+
+
+        
